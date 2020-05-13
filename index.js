@@ -4,7 +4,17 @@
 /* Create variables for principal, interest rate, and years. Assign them the values 200000, 0.05, and 30 respectively. Create another value called name and give it the value of your own name.
 */
 
+const principal = 200000;
+console.log(principal);
 
+const interestRate = .05;
+console.log(interestRate);
+
+const years = 30;
+console.log(years);
+
+const name = "Stephanie";
+console.log(name);
 
 
 
@@ -15,6 +25,13 @@ Create a variable called `monthlyInterestRate` and give it the value of interest
 
 Create another variable called `periods` and give it the value of years*12.
 */
+
+const monthlyInterestRate = interestRate / 12;
+console.log(monthlyInterestRate);
+
+
+const periods = years * 12;
+console.log(periods);
 
 
 
@@ -28,6 +45,21 @@ Hint #2: you'll need to use the `math` object for parts of this calculation!
 
 When your math is correct, monthlyRate will equal 1073.64
 */
+
+const intrestPlusOne = monthlyInterestRate + 1;
+
+const exponentialInterest = Math.pow(intrestPlusOne, periods);
+
+const numerator = monthlyInterestRate * exponentialInterest;
+
+const denominator = exponentialInterest - 1;
+
+const dividend = numerator / denominator;
+
+const monthlyPayment = principal * dividend;
+
+console.log(monthlyPayment);
+
 
 
 
