@@ -58,7 +58,7 @@ const dividend = numerator / denominator;
 
 const monthlyPayment = principal * dividend;
 
-console.log(monthlyPayment);
+console.log(monthlyPayment.toFixed(2));
 
 
 
@@ -70,9 +70,11 @@ console.log(monthlyPayment);
 If your name is `Oscar` mortgageCalculator() should return "Oscar, your monthly rate is 1073.64"
 */
 
+// function mortgageCalculator() {
+//     return name + ", your monthly rate is " + monthlyPayment.toFixed(2);
+// }
 
-
-
+// console.log(mortgageCalculator());
 
 // 🏡 Task 4: Arguments and Parameters
 /* Substitute the variables in your functions for parameters such that you can substitute `P`, `I`, and `N` when you call the function.
@@ -81,7 +83,20 @@ For example,
 mortgageCalculator(200000, 0.05, 30); <-- should return 1,073.64
 */
 
+function mortgageCalculator(principal, interestRate, years) {
+    const monthlyInterestRate = interestRate / 12;
+    const periods = years * 12;
 
+    const intrestPlusOne = monthlyInterestRate + 1;
+    const exponentialInterest = Math.pow(intrestPlusOne, periods);
+    const numerator = monthlyInterestRate * exponentialInterest;
+    const denominator = exponentialInterest - 1;
+    const dividend = numerator / denominator;
+    const monthlyPayment = principal * dividend;
+    return monthlyPayment.toFixed(2);
+}
+
+// console.log(mortgageCalculator(200000, .05, 30));
 
 
 
@@ -91,6 +106,32 @@ mortgageCalculator(200000, 0.05, 30); <-- should return 1,073.64
 Then, add control flow within your function such that IF creditScore is above 740, interest rate drops by 0.5%, if credit score is below 660, interest rate increases by 0.5% and if credit score is anywhere between 660 and 740 interest rate doesn't change.
 */
 
+function monthlyPaymentCalculator(principal, interestRate, years, creditScore) { 
+    let adjustedInterestRate = interestRate
+
+    if (creditScore > 740) {
+        adjustedInterestRate = interestRate - 0.005;
+    } else if (creditScore < 660) {
+        adjustedInterestRate = interestRate + 0.005;
+    } 
+    // else if (creditScore > 660 && creditScore < 740) {
+    //     adjustedInterestRate = interestRate;
+    // }
+    // above comments are another way to do it but unneccessary
+
+    const monthlyInterestRate = adjustedInterestRate / 12;
+    const periods = years * 12;
+
+    const intrestPlusOne = monthlyInterestRate + 1;
+    const exponentialInterest = Math.pow(intrestPlusOne, periods);
+    const numerator = monthlyInterestRate * exponentialInterest;
+    const denominator = exponentialInterest - 1;
+    const dividend = numerator / denominator;
+    const monthlyPayment = principal * dividend;
+    return monthlyPayment.toFixed(2);
+}
+
+console.log(monthlyPaymentCalculator(200000, .05, 30, 755)); 
 
 
 
@@ -103,7 +144,9 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 "{Name}, with an interest rate of 0.025, your monthly rate is $790"
 "{Name}, with an interest rate of 0.03, your monthly rate is $843"
 "{Name}, with an interest rate of 0.035, your monthly rate is $898"
+
 "{Name}, with an interest rate of 0.04, your monthly rate is $955"
+
 "{Name}, with an interest rate of 0.045, your monthly rate is $1013"
 "{Name}, with an interest rate of 0.05, your monthly rate is $1074"
 "{Name}, with an interest rate of 0.055, your monthly rate is $1136"
@@ -111,6 +154,22 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 */
 
 
+function variableInterestRate(principal, interestRate, years) {
+    console.log("Start");
+    let i = interestRate - .02;
+    const end = interestRate + .02;
+
+    // i++ means i = i + 1
+    // i += anyNumber means i = i + anyNumber
+    for (i; i <= end; i += .005) {
+        console.log(name + ", with an interest rate of " + i.toFixed(3) + ", your monthly rate is $" + Math.round(mortgageCalculator(principal, i, years)));
+    }
+}
+variableInterestRate(200000, .04, 30);
+variableInterestRate(300000, .06, 30);
+    // .5% increments 
+    // + && - 2% from interestRate
+    //print: name + ", with an interest rate of " + the fucking shit + ", your monthly rate is " + monthlyPayment
 
 
 // 🌟🌟🌟 STRETCH 🌟🌟🌟//
